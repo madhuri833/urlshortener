@@ -1,12 +1,15 @@
 package com.urlshortener.controller;
 
-import com.urlshortener.dto.*;
 import com.urlshortener.domain.ShortUrl;
+import com.urlshortener.dto.AnalyticsResponse;
+import com.urlshortener.dto.CreateShortUrlRequest;
+import com.urlshortener.dto.ShortUrlResponse;
 import com.urlshortener.service.UrlShortenerService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

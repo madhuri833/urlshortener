@@ -1,7 +1,1 @@
-package com.urlshortener.exception;
-
-public class InvalidUrlException extends RuntimeException {
-    public InvalidUrlException(String message) {
-        super(message);
-    }
-}
+package com.urlshortener.exception; public class InvalidUrlException extends RuntimeException { public InvalidUrlException(String m){super(m);} }

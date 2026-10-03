@@ -1,0 +1,19 @@
+# Build output
+target/
+
+# Runtime H2 database and local runtime data
+data/
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+*.swp
+*.swo

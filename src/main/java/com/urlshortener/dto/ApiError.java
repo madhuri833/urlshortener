@@ -1,15 +1,7 @@
 package com.urlshortener.dto;
-
 import java.time.Instant;
 import java.util.Map;
-
-public record ApiError(Instant timestamp, int status, String error, String message, String path,
-                       Map<String, String> fieldErrors) {
-    public static ApiError of(int status, String error, String message, String path) {
-        return new ApiError(Instant.now(), status, error, message, path, Map.of());
-    }
-
-    public ApiError withFields(Map<String, String> fields) {
-        return new ApiError(timestamp, status, error, message, path, fields);
-    }
+public record ApiError(Instant timestamp,int status,String error,String message,String path,Map<String,String> fieldErrors) {
+    public static ApiError of(int status,String error,String message,String path){return new ApiError(Instant.now(),status,error,message,path,Map.of());}
+    public static ApiError withFields(int status,String error,String message,String path,Map<String,String> fields){return new ApiError(Instant.now(),status,error,message,path,fields);}
 }

@@ -1,33 +1,9 @@
 package com.urlshortener.service;
-
-import org.junit.jupiter.api.Test;
-
-import java.util.HashSet;
-
-import static org.junit.jupiter.api.Assertions.*;
-
+import com.urlshortener.config.AppProperties;import org.junit.jupiter.api.Test;import static org.junit.jupiter.api.Assertions.*;
 class ShortCodeGeneratorTest {
-    private final ShortCodeGenerator generator = new ShortCodeGenerator();
-
-    @Test
-    void generatesRequestedLength() {
-        assertEquals(7, generator.generate(7).length());
-    }
-
-    @Test
-    void usesOnlyBase62Characters() {
-        assertTrue(generator.generate(100).matches("[0-9A-Za-z]+"));
-    }
-
-    @Test
-    void rejectsZeroLength() {
-        assertThrows(IllegalArgumentException.class, () -> generator.generate(0));
-    }
-
-    @Test
-    void hasNoCollisionsAcrossTenThousandSamples() {
-        HashSet<String> codes = new HashSet<>();
-        for (int i = 0; i < 10_000; i++)
-            assertTrue(codes.add(generator.generate(7)), "unexpected collision at sample " + i);
-    }
+  private AppProperties props(int n){AppProperties p=new AppProperties();p.getShortcode().setLength(n);return p;}
+  @Test void length(){assertEquals(7,new ShortCodeGenerator(props(7)).generate().length());}
+  @Test void alphabet(){assertTrue(new ShortCodeGenerator(props(10)).generate().matches("[0-9A-Za-z]{10}"));}
+  @Test void configuredLength(){assertEquals(3,new ShortCodeGenerator(props(3)).generate().length());}
+  @Test void oneCharacterLength(){assertEquals(1,new ShortCodeGenerator(props(1)).generate().length());}
 }

@@ -4,7 +4,9 @@
 
 ### Requirement interpretation
 
-A created link may have an optional TTL. A missing TTL means no expiry; a non-positive TTL is invalid; a TTL above the configured maximum is invalid. Once expired, the short code must behave as gone (`410`) rather than as an unknown code (`404`).
+A created link may have an optional TTL. A missing TTL means no expiry; a non-positive TTL is invalid; a TTL above the
+configured maximum is invalid. Once expired, the short code must behave as gone (`410`) rather than as an unknown code
+(`404`).
 
 ### Decomposition
 
@@ -18,7 +20,9 @@ A created link may have an optional TTL. A missing TTL means no expiry; a non-po
 
 ### AI-assisted execution and corrections
 
-The implementation was initially treated as a service-only concern. Engineer review moved the invariant into the domain (`ShortUrl.isExpired`) so every caller uses the same UTC `Instant` semantics. The service remains responsible for interpreting user TTL input and applying the configured maximum.
+The implementation was initially treated as a service-only concern. Engineer review moved the invariant into the domain
+(`ShortUrl.isExpired`) so every caller uses the same UTC `Instant` semantics. The service remains responsible for
+interpreting user TTL input and applying the configured maximum.
 
 ### Validation
 
@@ -33,7 +37,9 @@ The implementation was initially treated as a service-only concern. Engineer rev
 
 ### Requirement interpretation
 
-Only create operations under `POST /api/**` should consume rate-limit tokens. Client identity is the remote address unless `trust-forwarded-for=true`, in which case only the first `X-Forwarded-For` hop is used. Client state must be bounded and idle entries evicted when the client map grows beyond its configured maximum.
+Only create operations under `POST /api/**` should consume rate-limit tokens. Client identity is the remote address
+unless `trust-forwarded-for=true`, in which case only the first `X-Forwarded-For` hop is used. Client state must be
+bounded and idle entries evicted when the client map grows beyond its configured maximum.
 
 ### Decomposition
 
@@ -47,7 +53,10 @@ Only create operations under `POST /api/**` should consume rate-limit tokens. Cl
 
 ### AI-assisted execution and corrections
 
-The first generated filter response used Jackson serialization. That conflicted with the explicit requirement that hand-written filter output must not rely on Jackson being present. The engineer replaced it with controlled JSON construction and explicit `Content-Type`/`Retry-After` headers. The filter remains independent of controller advice because it executes before controller dispatch.
+The first generated filter response used Jackson serialization. That conflicted with the explicit requirement that
+hand-written filter output must not rely on Jackson being present. The engineer replaced it with controlled JSON
+construction and explicit `Content-Type`/`Retry-After` headers. The filter remains independent of controller advice
+because it executes before controller dispatch.
 
 ### Validation
 
@@ -59,7 +68,10 @@ The first generated filter response used Jackson serialization. That conflicted 
 
 ### Requirement interpretation
 
-"Analytics" could encompass a large event model. For this prototype it was narrowed to the minimum operationally useful facts explicitly supported by the domain: total click count and last access time, plus short-code/original URL and lifecycle timestamps for context. Referrer, user-agent, geography, unique visitors, time buckets and event retention are deferred.
+"Analytics" could encompass a large event model. For this prototype it was narrowed to the minimum operationally useful
+facts explicitly supported by the domain: total click count and last access time, plus short-code/original URL and
+lifecycle timestamps for context. Referrer, user-agent, geography, unique visitors, time buckets and event retention are
+deferred.
 
 ### Decomposition
 
@@ -73,7 +85,10 @@ The first generated filter response used Jackson serialization. That conflicted 
 
 ### AI-assisted execution and corrections
 
-AI initially treated analytics as a possible event-streaming feature. Engineer review constrained the first release to synchronous aggregate counters so the requirement stayed testable and consistent with the existing entity model. The click update uses one atomic repository update rather than read-modify-write application logic, reducing lost-update risk under concurrent redirects.
+AI initially treated analytics as a possible event-streaming feature. Engineer review constrained the first release to
+synchronous aggregate counters so the requirement stayed testable and consistent with the existing entity model. The
+click update uses one atomic repository update rather than read-modify-write application logic, reducing lost-update
+risk under concurrent redirects.
 
 ### Validation
 

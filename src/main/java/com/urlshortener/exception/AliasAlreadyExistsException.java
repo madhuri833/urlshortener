@@ -1,1 +1,7 @@
-package com.urlshortener.exception; public class AliasAlreadyExistsException extends RuntimeException { public AliasAlreadyExistsException(String m){super(m);} }
+package com.urlshortener.exception;
+
+public class AliasAlreadyExistsException extends RuntimeException {
+    public AliasAlreadyExistsException(String m) {
+        super(m);
+    }
+}

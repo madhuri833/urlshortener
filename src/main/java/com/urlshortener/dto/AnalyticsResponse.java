@@ -1,6 +1,7 @@
 package com.urlshortener.dto;
 
 import com.urlshortener.domain.ShortUrl;
+
 import java.time.Instant;
 
 public record AnalyticsResponse(

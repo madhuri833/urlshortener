@@ -8,5 +8,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 @SpringBootApplication
 @EnableConfigurationProperties(AppProperties.class)
 public class UrlshortenerApplication {
-    public static void main(String[] args) { SpringApplication.run(UrlshortenerApplication.class, args); }
+    public static void main(String[] args) {
+        SpringApplication.run(UrlshortenerApplication.class, args);
+    }
 }

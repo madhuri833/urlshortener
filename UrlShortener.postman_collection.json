@@ -5,31 +5,79 @@
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
-    { "key": "baseUrl", "value": "http://localhost:8080" },
-    { "key": "shortCode", "value": "" }
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "shortCode",
+      "value": ""
+    }
   ],
   "item": [
     {
       "name": "Create short URL (custom alias + TTL)",
       "request": {
         "method": "POST",
-        "header": [{ "key": "Content-Type", "value": "application/json" }],
-        "body": { "mode": "raw", "raw": "{\n  \"url\": \"https://example.com/docs\",\n  \"customAlias\": \"docs\",\n  \"ttlSeconds\": 3600\n}" },
-        "url": { "raw": "{{baseUrl}}/api/v1/urls/create", "host": ["{{baseUrl}}"], "path": ["api", "v1", "urls", "create"] }
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"url\": \"https://example.com/docs\",\n  \"customAlias\": \"docs\",\n  \"ttlSeconds\": 3600\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/urls/create",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "urls",
+            "create"
+          ]
+        }
       }
     },
     {
       "name": "Get short URL metadata",
       "request": {
         "method": "GET",
-        "url": { "raw": "{{baseUrl}}/api/v1/urls/{{shortCode}}", "host": ["{{baseUrl}}"], "path": ["api", "v1", "urls", "{{shortCode}}"] }
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/urls/{{shortCode}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "urls",
+            "{{shortCode}}"
+          ]
+        }
       }
     },
     {
       "name": "Get analytics",
       "request": {
         "method": "GET",
-        "url": { "raw": "{{baseUrl}}/api/v1/urls/{{shortCode}}/analytics", "host": ["{{baseUrl}}"], "path": ["api", "v1", "urls", "{{shortCode}}", "analytics"] }
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/urls/{{shortCode}}/analytics",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "urls",
+            "{{shortCode}}",
+            "analytics"
+          ]
+        }
       }
     },
     {
@@ -37,30 +85,77 @@
       "request": {
         "method": "GET",
         "description": "Disable Postman's auto-follow-redirects setting if you want to inspect the 302 response and Location header.",
-        "url": { "raw": "{{baseUrl}}/{{shortCode}}", "host": ["{{baseUrl}}"], "path": ["{{shortCode}}"] }
+        "url": {
+          "raw": "{{baseUrl}}/{{shortCode}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "{{shortCode}}"
+          ]
+        }
       }
     },
     {
       "name": "Error — invalid scheme (400)",
       "request": {
         "method": "POST",
-        "header": [{ "key": "Content-Type", "value": "application/json" }],
-        "body": { "mode": "raw", "raw": "{\n  \"url\": \"ftp://example.com/file\"\n}" },
-        "url": { "raw": "{{baseUrl}}/api/v1/urls/create", "host": ["{{baseUrl}}"], "path": ["api", "v1", "urls", "create"] }
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"url\": \"ftp://example.com/file\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/urls/create",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "urls",
+            "create"
+          ]
+        }
       }
     },
     {
       "name": "Error — unknown code (404)",
       "request": {
         "method": "GET",
-        "url": { "raw": "{{baseUrl}}/api/v1/urls/noSuchCode", "host": ["{{baseUrl}}"], "path": ["api", "v1", "urls", "noSuchCode"] }
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/urls/noSuchCode",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "urls",
+            "noSuchCode"
+          ]
+        }
       }
     },
     {
       "name": "Health (Actuator)",
       "request": {
         "method": "GET",
-        "url": { "raw": "{{baseUrl}}/actuator/health", "host": ["{{baseUrl}}"], "path": ["actuator", "health"] }
+        "url": {
+          "raw": "{{baseUrl}}/actuator/health",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "actuator",
+            "health"
+          ]
+        }
       }
     }
   ]
